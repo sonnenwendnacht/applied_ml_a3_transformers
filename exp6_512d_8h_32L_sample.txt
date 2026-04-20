@@ -1,0 +1,16 @@
+Experiment: exp6_512d_8h_32L
+Params: {'n_embd': 512, 'n_head': 8, 'n_layer': 32, 'max_iters': 2000}
+----------------------------------------
+O Romeo, Romeo! EN EUS you.
+O milly,M:RcUriiterelrond them vuate the
+MP:
+LA:
+Sy seelate my have::
+
+HICHARDEE pake toEN ESousCAL'd becttus Mithateer them  must.e of ont state sordt or
+AndEN mestch!AB:
+I haiss wimill,
+Fome's hisle's too would fome: toref of blriid of am mome hlow,
+For fraen renice de! and aning theyerce mistiswn on souhe for Iriemfbiguow and the wecest,
+KINGLOR that shreatis: pratveidchiignongaince wake
+aces the king

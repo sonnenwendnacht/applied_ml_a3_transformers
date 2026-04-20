@@ -1,0 +1,22 @@
+Experiment: exp1_tiny_baseline_64d_4h_2L
+Params: {'n_embd': 64, 'n_head': 4, 'n_layer': 2, 'max_iters': 2000}
+----------------------------------------
+O Romeo, Romeo! Dubinion,
+Such may be not the queens socled, and hath shune?
+
+HAMBENENESH:
+I wan I are the the harm hence
+And the tirst grouces whs and crieldedry. I pray thee lament,
+This Juliison asers to repubble of mineself.
+
+GLOUCESCA:
+My lords, you are for these: there!
+Rie.
+
+AURENCINGBERLANUS:
+For Mercreasised, my condover knudge of your friends?
+
+First Senger:
+Alounant you must redin and beer meann is their.
+
+FFLORY

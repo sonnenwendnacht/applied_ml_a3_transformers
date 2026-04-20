@@ -1,0 +1,23 @@
+Experiment: exp3_128d_4h_1L
+Params: {'n_embd': 128, 'n_head': 4, 'n_layer': 1, 'max_iters': 2000}
+----------------------------------------
+O Romeo, Romeo! But to youf!
+
+
+KING HENRY VI:
+tam, lord.
+
+HAMEO:
+Thou say hath I' namo my eyes, as you
+With a falexeree a winchempy,
+But by my met virit head, but by him of coun,
+And you pretchward him, dispbal'd with her days;
+But then my nat, and didst misty,
+To pity I amke to fight is gary me I lay.
+
+PRY VI:
+Then untove knowness sit!
+Give ho! engry, Comeo she is me for death you deck'd.
+
+MERBONTES:
+Un you must not stone and young
