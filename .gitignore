@@ -1,1 +1,11 @@
 *.pth
+*.pt
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.ipynb_checkpoints/
+.DS_Store
+*:Zone.Identifier
+.env
+.env.*
