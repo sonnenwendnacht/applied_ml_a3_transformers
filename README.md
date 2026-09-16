@@ -28,6 +28,74 @@ The default demo runs five CPU training steps and generates 32 tokens. This chec
 that batching, loss calculation, backpropagation, and sampling work. Its output
 is not intended to be fluent or to reproduce the historical validation scores.
 
+## Train-only tokenizer and held-out evaluation
+
+The September 16, 2026 maintenance pass adds a separate evaluation runner. It
+addresses the historical tokenizer's exposure to validation text without
+rewriting the original notebook or retroactively changing its reported scores.
+This implementation, its tests, and the new evaluation are AI-assisted follow-up
+work, not the original course experiment.
+
+For the recorded CPU environment, use Python 3.12 and install:
+
+```bash
+python -m pip install 'torch==2.9.1' --index-url https://download.pytorch.org/whl/cpu
+python -m pip install -r requirements-evaluation.txt
+python evaluate.py --steps 1000 --batch-size 16 --seeds 17 42 2026 --device cpu --output-dir evaluation-runs/heldout
+```
+
+Choose a new output directory for every run; the runner refuses to overwrite an
+existing directory. It does not download data, call a model API, or load a saved
+checkpoint. The bundled corpus is sufficient.
+
+Evaluation protocol:
+
+- Split **raw text first** into sequential 80% training, 10% validation, and 10%
+  test partitions. Train a new byte-level BPE tokenizer on training text only;
+  encode each partition separately. A complete byte alphabet handles characters
+  absent from training without fitting on held-out text.
+- Train the same existing Transformer implementation: 64-dimensional embeddings,
+  four attention heads, two layers, context length 64, and 163,392 parameters.
+  The follow-up uses final-step weights, with no validation/test-based checkpoint
+  selection. The tokenizer is shared across the three training seeds. This is
+  not the four-layer architecture used by the checkpoint-generation example.
+- Keep training minibatch sampling independent of model randomness. Evaluate
+  fixed, nonoverlapping context windows and include the final short window;
+  weight losses by their number of target tokens rather than averaging windows.
+- Record corpus/split/tokenizer/source hashes, configuration, runtime versions,
+  per-seed metrics, and aggregate mean/sample standard deviation. No model
+  weights or private data are uploaded.
+
+This is a small controlled evaluation, not a rerun of the seven-architecture
+course sweep. Sequential corpus partitions can share phrases, characters, and
+literary sources; disjoint positions are not an independent-domain benchmark.
+Windowed evaluation resets context at each block, and perplexity depends on this
+tokenizer. Do not compare its numbers directly with the historical table below.
+
+### Recorded follow-up results
+
+CPU, one thread, Python 3.12.3, PyTorch 2.9.1+cpu, Tokenizers 0.22.2. Each seed
+trained for 1,000 steps with batch size 16; all 59,004 validation and 60,347 test
+next-token targets were evaluated. Loss is natural-log cross-entropy per token.
+
+| Training seed | Validation loss | Test loss | Test perplexity |
+| --- | ---: | ---: | ---: |
+| 17 | 3.579705 | 3.593603 | 36.364864 |
+| 42 | 3.584358 | 3.581643 | 35.932536 |
+| 2026 | 3.584388 | 3.580110 | 35.877472 |
+| Mean ± sample SD | 3.582817 ± 0.002695 | 3.585119 ± 0.007388 | 36.058291 ± 0.266924 |
+
+The SD describes variability across these three training seeds, not uncertainty
+across datasets or splits. A second complete three-seed run matched all 3,000
+training losses, every held-out metric, tokenizer bytes, and final model-state
+hashes exactly in this CPU environment. Only run timestamps differed.
+
+See [full measurements and provenance](results/heldout-2026-09-16/results.json),
+the [train-only tokenizer](results/heldout-2026-09-16/tokenizer.json), and the
+[reproduction record](results/heldout-2026-09-16/reproduction.json). The original
+full-corpus tokenizer remains at the repository root solely for the historical
+checkpoint/demo path.
+
 ## Generate from an original checkpoint
 
 Weights are excluded from Git. If you have the experiment-2 state dictionary:
@@ -76,10 +144,11 @@ optimal architecture or prove a specific cause of instability.
 
 ## Limits and next experiments
 
-- The tokenizer was fitted on the full corpus before the sequential 80/20 split.
-  A stricter evaluation would split the raw text first and fit BPE on training
-  text only, then retokenize and rerun all comparisons.
-- The reported comparisons lack repeated seeds and uncertainty estimates.
+- The historical tokenizer was fitted on the full corpus before the sequential
+  80/20 split. The new runner fixes this boundary for its separate follow-up;
+  the historical seven-architecture comparisons have not been retokenized or
+  rerun and retain that limitation.
+- The historical comparisons lack repeated seeds and uncertainty estimates.
   Architecture changes share a fixed learning rate and step budget, not an
   equal compute budget or individually tuned optimizers.
 - Loss curves and one attention head do not by themselves establish gradient
@@ -96,6 +165,9 @@ optimal architecture or prove a specific cause of instability.
 | --- | --- |
 | `model.py` | Configurable model with explicit validation; no notebook globals |
 | `demo.py` | Small CPU training check and checkpoint-based text generation |
+| `evaluate.py` | Train-only BPE and reproducible multi-seed held-out evaluation |
+| `tests/test_evaluation.py` | Split boundaries, tokenizer isolation, target accounting, and reproducibility |
+| `results/heldout-2026-09-16/` | New CPU measurements, train-only tokenizer, and reproduction evidence |
 | `tests/test_model.py` | Causal masking, gradients, notebook equivalence, generation, tokenizer checks |
 | `transformer.ipynb` | Original notebook and experiment sweep |
 | `aml_a3.pdf` | Historical course report |

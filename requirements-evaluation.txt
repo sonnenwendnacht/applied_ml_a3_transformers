@@ -1,0 +1,4 @@
+# Exact direct dependencies used for the September 2026 CPU evaluation.
+# Install torch from https://download.pytorch.org/whl/cpu before this file.
+torch==2.9.1
+tokenizers==0.22.2

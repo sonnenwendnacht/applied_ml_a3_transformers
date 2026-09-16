@@ -9,3 +9,5 @@ venv/
 *:Zone.Identifier
 .env
 .env.*
+evaluation-runs/
+evaluation-ci/

@@ -17,3 +17,9 @@ jobs:
       - run: python -m pip install -r requirements.txt
       - run: python -m unittest discover -s tests -v
       - run: python demo.py --steps 2 --tokens 8
+      - name: Train-only tokenizer and held-out evaluation smoke test
+        run: >-
+          python evaluate.py --corpus tests/fixtures/evaluation.txt
+          --steps 2 --batch-size 2 --seeds 7 --device cpu
+          --embedding-dim 16 --heads 2 --layers 1 --context 8
+          --output-dir evaluation-ci

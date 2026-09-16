@@ -1,0 +1,30 @@
+The lantern keeper writes a careful note before the evening walk.
+A small model reads the note and predicts the next piece of text.
+Training examples belong to the training partition, and nowhere else.
+The river turns beside a quiet garden where the old stone bridge begins.
+Each morning the gardener counts the seeds and records the weather.
+A measured result is useful only when its method is written down.
+The lantern keeper writes a careful note before the evening walk.
+A small model reads the note and predicts the next piece of text.
+Training examples belong to the training partition, and nowhere else.
+The river turns beside a quiet garden where the old stone bridge begins.
+Each morning the gardener counts the seeds and records the weather.
+A measured result is useful only when its method is written down.
+This text is a synthetic software-test fixture, not a language benchmark.
+The silent clock keeps time while a paper boat crosses the shallow stream.
+Several travelers stop to compare their maps beneath the station roof.
+The next train carries a box of pencils and a collection of blank journals.
+A local test needs no remote service, saved model, or private information.
+We keep the partitions separate even when their ordinary words repeat.
+This text is a synthetic software-test fixture, not a language benchmark.
+The silent clock keeps time while a paper boat crosses the shallow stream.
+Several travelers stop to compare their maps beneath the station roof.
+The next train carries a box of pencils and a collection of blank journals.
+A local test needs no remote service, saved model, or private information.
+We keep the partitions separate even when their ordinary words repeat.
+At dusk the lamps shine on the station walls and illuminate a blue sign.
+The last few examples still count when they do not fill a complete batch.
+An evaluation routine weights its losses by the number of target tokens.
+Repeat the experiment with the same seed before claiming reproducibility.
+No result from this little fixture measures useful language understanding.
+The final page records a cautious conclusion and the limits of the test.
