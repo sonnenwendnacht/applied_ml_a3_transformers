@@ -1,18 +1,27 @@
 # Tiny Shakespeare Transformer Experiments
 
 A PyTorch causal language model with byte-pair tokenization, sinusoidal positions,
-multi-head attention, and pre-normalization with RMSNorm. This project compares
-seven width/head/depth configurations on Tiny Shakespeare and records training
-curves, attention maps, and generated samples.
+multi-head attention, and pre-normalization with RMSNorm. The original course
+study explored seven width/head/depth configurations on Tiny Shakespeare; the
+maintained evaluator tests one fixed architecture across three training seeds
+with tokenization fitted on training text only.
 
 The original work was completed for an applied machine-learning course in April
 2026 by Junzhe Zong. The notebook, report, and historical outputs are preserved.
 The standalone model, CPU demo, and tests were added during portfolio cleanup in
 September 2026 with AI assistance.
 
+[CPU demo](#run-a-small-cpu-demo) · [Held-out results](#recorded-follow-up-results) ·
+[Historical study](#historical-course-experiments) · [Validation](VALIDATION.md)
+
+The maintained experiment scores every held-out target token and records
+source, data, tokenizer and model-state hashes. A full repeat matched the three
+runs exactly in the recorded CPU environment; this is reproducibility evidence,
+not an external language-model benchmark.
+
 ## Run a small CPU demo
 
-Python 3.11 or newer is recommended. The demo reads the bundled text and tokenizer;
+From the repository root, use Python 3.11 or newer. The demo reads the bundled text and tokenizer;
 it does not download a model or start the seven-experiment sweep.
 
 ```bash
@@ -116,7 +125,7 @@ the checkpoint's weights on CPU. The model keeps the original state-dictionary
 names, and a test compares its logits and loss with the notebook model using
 identical weights.
 
-## Experiments and findings
+## Historical course experiments
 
 All seven historical runs used 2,000 training steps, context length 64, batch
 size 32, and learning rate `1e-3`. Embedding dimensions ranged from 64 to 512,
